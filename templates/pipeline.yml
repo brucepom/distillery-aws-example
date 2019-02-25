@@ -69,7 +69,7 @@ Resources:
     Type: AWS::S3::Bucket
     DeletionPolicy: Delete
     Properties:
-      BucketName: !Sub "${ApplicationName}-bp-builds"
+      BucketName: !Sub "${ApplicationName}-bp-builds-2"
       AccessControl: Private
       VersioningConfiguration:
         Status: Enabled
@@ -169,7 +169,7 @@ Resources:
         Type: CODEPIPELINE
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
-        Image: centos:postgresql-96-centos7
+        Image: docker.io/centos:postgresql-96-centos7
         Type: LINUX_CONTAINER
         EnvironmentVariables:
           - Name: ARTIFACT_S3_BUCKET
