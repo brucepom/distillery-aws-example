@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :distillery_example, Example.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "user",
+  password: "pass",
   database: "distillery_example_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
