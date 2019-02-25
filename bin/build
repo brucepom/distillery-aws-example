@@ -50,6 +50,10 @@ function do_pre_build(){
     mix local.rebar --force
     mix local.hex --force
 
+    echo "==> Run tests"
+    MIX_ENV=test mix deps.get
+    mix test
+
     echo "==> Installing project dependencies"
     mix deps.get
 }

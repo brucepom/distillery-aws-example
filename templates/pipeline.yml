@@ -122,20 +122,6 @@ Resources:
                 - Name: Built
               Configuration: 
                 ProjectName: !Ref CodeBuild
-        - Name: Test
-          Actions:
-            - Name: CodeBuildTest
-              InputArtifacts:
-                - Name: Source
-              ActionTypeId: 
-                Category: Build
-                Owner: AWS
-                Version: 1
-                Provider: CodeBuild
-              OutputArtifacts:
-                - Name: BuiltTest
-              Configuration: 
-                ProjectName: !Ref CodeBuildTest
         - Name: Deploy
           Actions:
             - Name: DeployInfra
@@ -181,28 +167,6 @@ Resources:
       ServiceRole: !Ref CodeBuildRole
       Source:
         Type: CODEPIPELINE
-      Environment:
-        ComputeType: BUILD_GENERAL1_SMALL
-        Image: centos:7
-        Type: LINUX_CONTAINER
-        EnvironmentVariables:
-          - Name: ARTIFACT_S3_BUCKET
-            Value: !Ref S3BucketBuilds
-          - Name: APPLICATION_NAME
-            Value: !Ref ApplicationName
-      Artifacts:
-        Name: !Ref ApplicationName
-        Type: CODEPIPELINE
-
-  CodeBuildTest:
-    Type: AWS::CodeBuild::Project
-    Properties:
-      Name: !Ref ApplicationName
-      Description: "Build project for the application"
-      ServiceRole: !Ref CodeBuildRole
-      Source:
-        Type: CODEPIPELINE
-        BuildSpec: testspec.yml
       Environment:
         ComputeType: BUILD_GENERAL1_SMALL
         Image: centos:7
