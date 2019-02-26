@@ -6,10 +6,12 @@ defmodule Example.Repo do
   DATABASE_URL environment variable.
   """
   def init(_, opts) do
+
+
     opts =
       opts
       |> Keyword.put(:url, System.get_env("DATABASE_URL"))
-      |> Keyword.put(:hostname, System.get_env("DATABASE_HOST"))
+      |> Keyword.put(:hostname, System.get_env("DATABASE_HOST") || Application.get_env(:distillery_example, __MODULE__)[:hostname])
     {:ok, opts}
   end
 end
